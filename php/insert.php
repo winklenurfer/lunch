@@ -3,6 +3,11 @@
 $link = mysqli_connect('localhost', 'root', 'root', 'lunch') or die("Error " . mysqli_error($link));
 
 // Escape $_POST
+if (!$_POST['name']) {
+	echo "Please enter a name.";
+	exit();
+}
+
 $processedPost = $link->real_escape_string($_POST['name']);
 
 // Store all current DB entries
