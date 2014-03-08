@@ -1,4 +1,6 @@
 <html>
+<link href='http://fonts.googleapis.com/css?family=Roboto:300,900' rel='stylesheet' type='text/css'>
+<link href='css/style.css' rel='stylesheet' type='text/css' media='screen'>
 <body>
 
 <form action="update.php" method="post">
@@ -18,17 +20,17 @@ function showAll(){
 	$selectAllResult = $link->query($selectAll);
 	
 	echo "<h3>Current restaurants:</h3>";
-	
+	echo "<div class='list_all'>";
 	echo "<form action='update.php' method='post'>";
 	while($row = $selectAllResult->fetch_array()) {
-		echo $row["name"] . " " . '<button name="delete" type="submit" value="' . $row['name'] . '">Delete</button><br>';
+		echo "<div>" . $row["name"] . " " . '<button class="right" name="delete" type="submit" value="' . $row['name'] . '">Delete</button></div>';
 	}
-	echo "</form>";
+	echo "</form></div>";
 }
 
 // Check for name
 if (!$_POST['delete'] && !$_POST['name']){
-	echo "<p>Enter restaurant name to add.<p>";
+	echo "<p>Enter restaurant name to add.</p>";
 	showAll();
 }
 
@@ -40,7 +42,7 @@ if ($_POST['delete']) {
 	$result = $link->query($query);
 
 	if ($result) {
-		echo "<p>" . $_POST['delete'] . " deleted!</p>";
+		echo "<p class='action'>[ " . $_POST['delete'] . " deleted! ]</p>";
 	}
 	showAll();
 }
@@ -56,7 +58,7 @@ if ($_POST['name']) {
 	if ($numResult) {
 		$row = $numResult->fetch_array();
 		if ($row['count'] > 0) {
-			echo "<p>" . $_POST['name'] . " already exists...<p>";
+			echo "<p class='action'>[ " . $_POST['name'] . " already exists... ]<p>";
 			showAll();
 		} else {
 			// Add new entry 
@@ -65,7 +67,7 @@ if ($_POST['name']) {
 			$result = $link->query($query);
 			
 			if ($result) {
-				echo "<p>" . $_POST['name'] . " entered successfully!</p>";
+				echo "<p class='action'>[ " . $_POST['name'] . " entered successfully! ]</p>";
 			}
 			showAll();
 		}
