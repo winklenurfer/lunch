@@ -5,6 +5,7 @@ body {
 	text-align: center;
 	background-color: #333;
 	color: #DDD;
+	margin: 25px 8px;
 }
 
 h1 {
@@ -15,6 +16,8 @@ h1 {
 h3 {
 	font-weight: 600;
 	font-size: 1.5em;
+	margin-top:.5em;
+	margin-bottom:.5em;
 }
 
 form {
@@ -22,11 +25,10 @@ form {
 }
 
 div.list_all {
-	width:250px;
+	width:200px;
 	margin-left: auto;
   	margin-right: auto;
 	padding:10px;
-	border:5px solid white;
 	text-align: left;
 	overflow: hidden;
 	line-height: 150%;
@@ -36,9 +38,9 @@ div.random {
 	margin-top: 50px;
 }
 
-button.right {
-	float: right;
-	clear: both;
+button.danger {
+	margin: 2px;
+	width: 200px;
 }
 
 .action {
