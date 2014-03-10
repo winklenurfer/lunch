@@ -36,6 +36,47 @@ div.list_all {
 
 div.random {
 	margin-top: 50px;
+	width: 270px;
+	margin-left: auto;
+  	margin-right: auto;
+	padding:10px;
+	text-align: center;
+	background-color: #ececec;
+	overflow: hidden;
+	line-height: 150%;
+	border: 1px solid #d4d4d4;
+	border-radius: 3px;
+}
+
+div.random_item_1 {
+	margin:0px;
+	padding:2px 4px;
+	border:2px;
+	color: #333;
+	font-size:50px;
+	line-height:50px;
+	font-weight:bold;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+div.random_item_2 {
+	margin:0px;
+	padding:10px 4px;
+	border:2px;
+	color: #333;
+	font-size:22px;
+	line-height:22px;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+div.random_item_3 {
+	margin:0px;
+	padding:5px 4px;
+	border:2px;
+	color: #333;
+	font-size:12px;
+	line-height:12px;
+    text-shadow: 1px 1px 0 #fff;
 }
 
 button.danger {

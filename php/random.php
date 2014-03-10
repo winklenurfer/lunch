@@ -1,11 +1,12 @@
 <html>
 <link href='http://fonts.googleapis.com/css?family=Roboto:300,900' rel='stylesheet' type='text/css'>
 <link href='css/style.css' rel='stylesheet' type='text/css' media='screen'>
+<link href='css/gh-buttons.css' rel='stylesheet' type='text/css' media='screen'>
 <body>
 
 <?php
-// $link = mysqli_connect('localhost', 'root', 'root', 'lunch') or die("Error " . mysqli_error($link)); // Local DB
-$link = mysqli_connect('127.10.207.2:3306', 'adminyMddRhL', 'M6iuBUi6WG_A', 'lunch') or die("Error " . mysqli_error($link)); // Prod DB
+ $link = mysqli_connect('localhost', 'root', 'root', 'lunch') or die("Error " . mysqli_error($link)); // Local DB
+// $link = mysqli_connect('127.10.207.2:3306', 'adminyMddRhL', 'M6iuBUi6WG_A', 'lunch') or die("Error " . mysqli_error($link)); // Prod DB
 
 $select = "SELECT name
 		FROM restaurants
@@ -15,9 +16,11 @@ $select = "SELECT name
 
 $selectResult = $link->query($select);
 
-echo "<div class=random>";
+echo "<div class='random'>";
+$i = 1;
 while($row = $selectResult->fetch_array()) {
-	echo "<div>" . $row["name"] . "</div>";
+	echo "<div class='random_item_" . $i . "'>" . $row["name"] . "</div>";
+	$i++;
 }
 echo "</div>";
 
