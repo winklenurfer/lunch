@@ -29,6 +29,8 @@ function showAll(){
 		echo '<div><button class="button danger icon trash" name="delete" type="submit" value="' . $row['name'] . '">' . $row['name'] . '</button></div>';
 	}
 	echo "</form></div>";
+	echo "<a href='../' class='button big'>Home</a>";
+	echo "<a href='../random.php' class='button big'>Random</a>";
 }
 
 function removeWhitespace($str){

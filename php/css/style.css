@@ -36,6 +36,7 @@ div.list_all {
 
 div.random {
 	margin-top: 50px;
+	margin-bottom: 10px;
 	width: 270px;
 	margin-left: auto;
   	margin-right: auto;
@@ -88,7 +89,7 @@ button.danger {
 	color:#FFF;
 }
 
-a:link {color:#DDD;}    /* unvisited link */
-a:visited {color:#DDD;}  /* visited link */
-a:hover {color:#FFF;}  /* mouse over link */
+/*a:link {color:#DDD;}    /* unvisited link 
+a:visited {color:#DDD;}  /* visited link 
+a:hover {color:#FFF;}  /* mouse over link 
 a:active {color:#AAA;}  /* selected link */
