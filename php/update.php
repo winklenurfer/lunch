@@ -4,6 +4,7 @@
 <link href='css/gh-buttons.css' rel='stylesheet' type='text/css' media='screen'>
 <body>
 
+<div class="wrapper">
 <form action="update.php" method="post">
 	<input type="text" name="name">
 	<input type="submit" class="button icon add" value="Add">
@@ -11,13 +12,13 @@
 
 <?php
 // DB connection
-// $link = mysqli_connect('localhost', 'root', 'root', 'lunch') or die("Error " . mysqli_error($link)); // Local DB
-$link = mysqli_connect('127.10.207.2:3306', 'adminyMddRhL', 'M6iuBUi6WG_A', 'lunch') or die("Error " . mysqli_error($link)); // Prod DB
+$link = mysqli_connect('localhost', 'root', 'root', 'lunch') or die("Error " . mysqli_error($link)); // Local DB
+// $link = mysqli_connect('127.10.207.2:3306', 'adminyMddRhL', 'M6iuBUi6WG_A', 'lunch') or die("Error " . mysqli_error($link)); // Prod DB
 
 // Display all restaurants
 function showAll(){
-	// $link = mysqli_connect('localhost', 'root', 'root', 'lunch') or die("Error " . mysqli_error($link)); // Local DB
-	$link = mysqli_connect('127.10.207.2:3306', 'adminyMddRhL', 'M6iuBUi6WG_A', 'lunch') or die("Error " . mysqli_error($link)); // Prod DB
+	$link = mysqli_connect('localhost', 'root', 'root', 'lunch') or die("Error " . mysqli_error($link)); // Local DB
+	// $link = mysqli_connect('127.10.207.2:3306', 'adminyMddRhL', 'M6iuBUi6WG_A', 'lunch') or die("Error " . mysqli_error($link)); // Prod DB
 	
 	$selectAll = "SELECT name FROM restaurants";
 	$selectAllResult = $link->query($selectAll);
@@ -29,8 +30,7 @@ function showAll(){
 		echo '<div><button class="button danger icon trash" name="delete" type="submit" value="' . $row['name'] . '">' . $row['name'] . '</button></div>';
 	}
 	echo "</form></div>";
-	echo "<a href='../' class='button big'>Home</a>";
-	echo "<a href='../random.php' class='button big'>Random</a>";
+	echo "<a href='index.php' class='button big'>Random</a>";
 }
 
 function removeWhitespace($str){
@@ -99,5 +99,6 @@ mysqli_close($link);
 
 ?>
 
+</div>
 </body>
 </html>
