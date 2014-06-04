@@ -5,16 +5,20 @@
 <body>
 
 <?php
-// $link = mysqli_connect('localhost', 'root', 'root', 'lunch') or die("Error " . mysqli_error($link)); // Local DB
-$link = mysqli_connect('127.10.207.2:3306', 'adminyMddRhL', 'M6iuBUi6WG_A', 'lunch') or die("Error " . mysqli_error($link)); // Prod DB
+require ('lib/dbConnect.php');
+
+/* Database connection */
+$dbCon = new dbConnection();
+$con = $dbCon->databaseConnect();
+/*~~~~~~~~~~~~~~~~~~~~*/
 
 $select = "SELECT name
 		FROM restaurants
 		ORDER BY RAND()
 		LIMIT 3"
-		or die("Error in the consult.." . mysqli_error($link));
+		or die("Error in the consult.." . mysqli_error($con));
 
-$selectResult = $link->query($select);
+$selectResult = $con->query($select);
 echo "<div class='wrapper'>";
 echo "<div>What about one of these places?</div>";
 echo "<div class='random'>";
@@ -28,7 +32,7 @@ echo "</div>";
 echo "<a href='update.php' class='button big'>Add/Remove</a>";
 echo "<a href='index.php' class='button big'>Refresh</a>";
 echo "</div>";
-mysqli_close($link);
+mysqli_close($con);
 
 ?>
 

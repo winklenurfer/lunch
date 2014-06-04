@@ -11,17 +11,17 @@
 </form>
 
 <?php
-// DB connection
-// $link = mysqli_connect('localhost', 'root', 'root', 'lunch') or die("Error " . mysqli_error($link)); // Local DB
-$link = mysqli_connect('127.10.207.2:3306', 'adminyMddRhL', 'M6iuBUi6WG_A', 'lunch') or die("Error " . mysqli_error($link)); // Prod DB
+require ('lib/dbConnect.php');
 
 // Display all restaurants
 function showAll(){
-	// $link = mysqli_connect('localhost', 'root', 'root', 'lunch') or die("Error " . mysqli_error($link)); // Local DB
-	$link = mysqli_connect('127.10.207.2:3306', 'adminyMddRhL', 'M6iuBUi6WG_A', 'lunch') or die("Error " . mysqli_error($link)); // Prod DB
+	/* Database connection */
+	$dbCon = new dbConnection();
+	$con = $dbCon->databaseConnect();
+	/*~~~~~~~~~~~~~~~~~~~~*/
 	
 	$selectAll = "SELECT name FROM restaurants";
-	$selectAllResult = $link->query($selectAll);
+	$selectAllResult = $con->query($selectAll);
 	
 	echo "<h3>Current restaurants:</h3>";
 	echo "<div class='list_all'>";
@@ -45,13 +45,16 @@ if (!$_POST['delete'] && !$_POST['name']){
 	echo "<p>Enter restaurant name to add.</p>";
 	showAll();
 } else {
-	
+	/* Database connection */
+	$dbCon = new dbConnection();
+	$con = $dbCon->databaseConnect();
+	/*~~~~~~~~~~~~~~~~~~~~*/
 	// Delete entry
 	if ($_POST['delete']) {
-		$delete = $link->real_escape_string($_POST['delete']);
+		$delete = $con->real_escape_string($_POST['delete']);
 	
-		$query = "DELETE FROM restaurants WHERE name = '$delete'" or die("Error in the consult.." . mysqli_error($link));
-		$result = $link->query($query);
+		$query = "DELETE FROM restaurants WHERE name = '$delete'" or die("Error in the consult.." . mysqli_error($con));
+		$result = $con->query($query);
 	
 		if ($result) {
 			echo "<p class='action'>[ " . $_POST['delete'] . " deleted! ]</p>";
@@ -62,10 +65,10 @@ if (!$_POST['delete'] && !$_POST['name']){
 		// Add entry
 		if ($_POST['name'] && strlen($_POST['name']) > 0 && strlen($_POST['name']) < 31 && strlen(removeWhitespace($_POST['name'])) > 0) {
 			// Escape $_POST
-			$processedPost = $link->real_escape_string($_POST['name']);
+			$processedPost = $con->real_escape_string($_POST['name']);
 		
 			$num = "SELECT COUNT(*) as count FROM restaurants WHERE name = '$processedPost'";
-			$numResult = $link->query($num);
+			$numResult = $con->query($num);
 			
 			// Check for pre-existing entry
 			if ($numResult) {
@@ -75,9 +78,9 @@ if (!$_POST['delete'] && !$_POST['name']){
 					showAll();
 				} else {
 					// Add new entry 
-					$query = "INSERT INTO restaurants (name) VALUES ('$processedPost')" or die("Error in the consult.." . mysqli_error($link));
+					$query = "INSERT INTO restaurants (name) VALUES ('$processedPost')" or die("Error in the consult.." . mysqli_error($con));
 					
-					$result = $link->query($query);
+					$result = $con->query($query);
 					
 					if ($result) {
 						echo "<p class='action'>[ " . $_POST['name'] . " entered successfully! ]</p>";
@@ -95,7 +98,7 @@ if (!$_POST['delete'] && !$_POST['name']){
 	}
 }
 
-mysqli_close($link);
+mysqli_close($con);
 
 ?>
 
