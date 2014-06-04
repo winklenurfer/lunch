@@ -1,20 +1,33 @@
 <?php
 
 // Enter the path that the oauth library is in relation to the php file
-require_once ('lib/OAuth.php');
+require_once ('../lib/OAth.php');
+
+if (isset($_GET["term"])) {
+	$term = $_GET["term"];
+} else {
+	echo "Error: Please enter a valid search term.";
+	exit();
+}
+
+if (isset($_GET["location"])) {
+	$location = $_GET["location"];
+} else {
+	$location = 'Financial%20District';
+}
 
 // For example, request business with id 'the-waterboy-sacramento'
 // $unsigned_url = "http://api.yelp.com/v2/business/the-waterboy-sacramento";
 
 // For examaple, search for 'tacos' in 'sf'
-$unsigned_url = "http://api.yelp.com/v2/search?term=tacos&location=sf";
+$unsigned_url = "http://api.yelp.com/v2/search?term=$term&location=$location";
 
 
 // Set your keys here
-$consumer_key = "";
-$consumer_secret = "";
-$token = "";
-$token_secret = "";
+$consumer_key = "z35EISg1oDSFBo0uO_bl0Q";
+$consumer_secret = "siE72wafwWpPnhSlhCo-6OC7Qt0";
+$token = "uEpoeQ_KMzFJwCfCypqeVpN2Wnpz9YCU";
+$token_secret = "NrfoiLkd2Tazh-vnyH-wAyXTt0w";
 
 // Token object built using the OAuth library
 $token = new OAuthToken($token, $token_secret);
@@ -43,8 +56,8 @@ curl_close($ch);
 
 // Handle Yelp response data
 $response = json_decode($data);
-
+echo $data;
 // Print it for debugging
-print_r($response);
+// print_r($response);
 
 ?>

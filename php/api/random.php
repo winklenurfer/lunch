@@ -1,5 +1,5 @@
 <?php
-require ('../lib/dbConnect.php');
+require_once ('../lib/dbConnect.php');
 
 function get_random_restaurants($num){
 	/* Database connection */
