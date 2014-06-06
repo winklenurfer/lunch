@@ -4,37 +4,26 @@
 <link href='css/style.css' rel='stylesheet' type='text/css' media='screen'>
 <body>
 
-<?php
-require ('lib/dbConnect.php');
-
-/* Database connection */
-$dbCon = new dbConnection();
-$con = $dbCon->databaseConnect();
-/*~~~~~~~~~~~~~~~~~~~~*/
-
-$select = "SELECT name
-		FROM restaurants
-		ORDER BY RAND()
-		LIMIT 3"
-		or die("Error in the consult.." . mysqli_error($con));
-
-$selectResult = $con->query($select);
-echo "<div class='wrapper'>";
-echo "<div>What about one of these places?</div>";
-echo "<div class='random'>";
-$i = 1;
-while($row = $selectResult->fetch_array()) {
-	echo "<div class='random_item_" . $i . "'>" . $row["name"] . "</div>";
-	$i++;
-}
-echo "</div>";
-
-echo "<a href='update.php' class='button big'>Add/Remove</a>";
-echo "<a href='index.php' class='button big'>Refresh</a>";
-echo "</div>";
-mysqli_close($con);
-
-?>
-
+<div class='wrapper'>
+	<div>What about one of these places?</div>
+	
+	<div class='random'>
+		<?php
+		require ('lib/dbRestaurants.php');
+		$dbRestaurants = new dbRestaurants();
+		$restaurants = $dbRestaurants->get_random_restaurants(3);
+		
+		// Loop through 3 random restaurants and display
+		$i = 1;
+		foreach ($restaurants as $restaurant) {
+			echo "<div class='random_item_" . $i . "'>" . $restaurant . "</div>";
+			$i++;
+		}
+		?>
+	</div>
+	
+	<a href='update.php' class='button big'>Add/Remove</a>
+	<a href='index.php' class='button big'>Refresh</a>
+</div>
 </body>
 </html>

@@ -82,7 +82,7 @@ if (!$_POST['delete'] && !$_POST['name']){
 					
 					$result = $con->query($query);
 					
-					if ($result) {
+					if  ($result) {
 						echo "<p class='action'>[ " . $_POST['name'] . " entered successfully! ]</p>";
 					}
 					showAll();
