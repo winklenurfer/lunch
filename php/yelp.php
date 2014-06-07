@@ -16,7 +16,7 @@ if (!$_POST['name']) {
 	echo "<h1><a href='update.php'>Please provide a valid search term.</a></h1>";
 } else {
 	$search = new yelpSearch();
-	$result = $search->search_yelp($_POST['name']);
+	$result = $search->search_yelp($_POST['name'],"array");
 
 	foreach($result->businesses as $business){
 		echo "<div>";

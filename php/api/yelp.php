@@ -12,7 +12,7 @@ if (isset($_GET["term"])) {
 
 $yelpSearch = new yelpSearch();
 
-echo $yelpSearch->search_yelp($term);
+echo $yelpSearch->search_yelp($term,"json");
 
 /*if (isset($_GET["location"])) {
 	$location = $_GET["location"];
