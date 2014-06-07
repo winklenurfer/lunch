@@ -1,4 +1,7 @@
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- HTML5 -->
+<meta charset="utf-8">
 <link href='http://fonts.googleapis.com/css?family=Roboto:300,900' rel='stylesheet' type='text/css'>
 <link href='css/gh-buttons.css' rel='stylesheet' type='text/css' media='screen'>
 <link href='css/style.css' rel='stylesheet' type='text/css' media='screen'>

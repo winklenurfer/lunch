@@ -1,4 +1,7 @@
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- HTML5 -->
+<meta charset="utf-8">
 <link href='http://fonts.googleapis.com/css?family=Roboto:300,900' rel='stylesheet' type='text/css'>
 <link href='css/style.css' rel='stylesheet' type='text/css' media='screen'>
 <link href='css/gh-buttons.css' rel='stylesheet' type='text/css' media='screen'>
@@ -9,34 +12,32 @@
 	<input type="text" name="name">
 	<input type="submit" class="button icon add" value="Add">
 </form>
+<br><br>
+<form action="yelp.php" method="post">
+	<input type="text" name="name">
+	<input type="submit" class="button icon add" value="Yelp Search">
+</form>
 
 <?php
-require ('lib/dbConnect.php');
+require ('lib/dbRestaurants.php');
 
 // Display all restaurants
 function showAll(){
-	/* Database connection */
-	$dbCon = new dbConnection();
-	$con = $dbCon->databaseConnect();
-	/*~~~~~~~~~~~~~~~~~~~~*/
-	
-	$selectAll = "SELECT name FROM restaurants";
-	$selectAllResult = $con->query($selectAll);
+	$dbRestaurants = new dbRestaurants();
+	$allRestaurants = $dbRestaurants->get_all_restaurants();
 	
 	echo "<h3>Current restaurants:</h3>";
 	echo "<div class='list_all'>";
 	echo "<form action='update.php' method='post'>";
-	while($row = $selectAllResult->fetch_array()) {
-		echo '<div><button class="button danger icon trash" name="delete" type="submit" value="' . $row['name'] . '">' . $row['name'] . '</button></div>';
+	foreach ($allRestaurants as $restaurant) {
+		echo '<div><button class="button danger icon trash" name="delete" type="submit" value="' . $restaurant . '">' . $restaurant . '</button></div>';
 	}
 	echo "</form></div>";
 	echo "<a href='index.php' class='button big'>Random</a>";
 }
 
 function removeWhitespace($str){
-	
 	$new_str=preg_replace('/\s+/', '', $str);
-	
 	return $new_str;
 }
 
@@ -45,49 +46,28 @@ if (!$_POST['delete'] && !$_POST['name']){
 	echo "<p>Enter restaurant name to add.</p>";
 	showAll();
 } else {
-	/* Database connection */
-	$dbCon = new dbConnection();
-	$con = $dbCon->databaseConnect();
-	/*~~~~~~~~~~~~~~~~~~~~*/
-	// Delete entry
+	$dbRestaurant = new dbRestaurants();
+
 	if ($_POST['delete']) {
-		$delete = $con->real_escape_string($_POST['delete']);
-	
-		$query = "DELETE FROM restaurants WHERE name = '$delete'" or die("Error in the consult.." . mysqli_error($con));
-		$result = $con->query($query);
-	
-		if ($result) {
+		// Delete restaurant
+		if ($dbRestaurant->delete_restaurant_by_name($_POST['delete'])) {
 			echo "<p class='action'>[ " . $_POST['delete'] . " deleted! ]</p>";
+		} else {
+			echo "<p class='action'>[ Error occured. Delete unsuccessful. ]</p>";
 		}
 		showAll();
 	} else {
-		
-		// Add entry
+		// Check that length meets requirement
 		if ($_POST['name'] && strlen($_POST['name']) > 0 && strlen($_POST['name']) < 31 && strlen(removeWhitespace($_POST['name'])) > 0) {
-			// Escape $_POST
-			$processedPost = $con->real_escape_string($_POST['name']);
-		
-			$num = "SELECT COUNT(*) as count FROM restaurants WHERE name = '$processedPost'";
-			$numResult = $con->query($num);
 			
-			// Check for pre-existing entry
-			if ($numResult) {
-				$row = $numResult->fetch_array();
-				if ($row['count'] > 0) {
-					echo "<p class='action'>[ " . $_POST['name'] . " already exists... ]<p>";
-					showAll();
-				} else {
-					// Add new entry 
-					$query = "INSERT INTO restaurants (name) VALUES ('$processedPost')" or die("Error in the consult.." . mysqli_error($con));
-					
-					$result = $con->query($query);
-					
-					if  ($result) {
-						echo "<p class='action'>[ " . $_POST['name'] . " entered successfully! ]</p>";
-					}
-					showAll();
-				}
+			// Add restaurant
+			if ($dbRestaurant->add_restaurant_by_name($_POST['name'])) {
+				echo "<p class='action'>[ " . $_POST['name'] . " entered successfully! ]</p>";
+			} else {
+				echo "<p class='action'>[ An error has occured. Check if " . $_POST['name'] . " already exists... ]<p>";
 			}
+			showAll();
+			
 		} elseif (strlen($_POST['name']) > 30) {
 			echo "<p class='action'>" . $_POST['name'] . " is too long. Please use 30 characters or less.</p>";
 			showAll();
@@ -97,8 +77,6 @@ if (!$_POST['delete'] && !$_POST['name']){
 		}
 	}
 }
-
-mysqli_close($con);
 
 ?>
 

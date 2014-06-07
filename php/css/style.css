@@ -94,7 +94,7 @@ button.danger {
 	color:#FFF;
 }
 
-/*a:link {color:#DDD;}    /* unvisited link 
-a:visited {color:#DDD;}  /* visited link 
-a:hover {color:#FFF;}  /* mouse over link 
+a:link {color:#DDD;}    /* unvisited link */
+a:visited {color:#DDD;}  /* visited link */
+a:hover {color:#FFF;}  /* mouse over link */
 a:active {color:#AAA;}  /* selected link */

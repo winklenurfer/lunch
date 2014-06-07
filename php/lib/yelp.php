@@ -33,7 +33,8 @@ class yelpSearch {
 	
 	function search_yelp ($term) {
 		$location = 'Financial%20District';
-		$unsigned_url = "http://api.yelp.com/v2/search?term=$term&location=$location";
+		$limit = '10';
+		$unsigned_url = "http://api.yelp.com/v2/search?term=$term&location=$location&limit=$limit";
 
 		$signed_url = $this->signUrl($unsigned_url);
 		
@@ -44,10 +45,10 @@ class yelpSearch {
 		$data = curl_exec($ch); // Yelp response
 		curl_close($ch);
 		
-		return $data;
+		//return $data;
 		// Handle Yelp response data
-		//$response = json_decode($data);
-		
+		$response = json_decode($data);
+		return $response;
 		// Print it for debugging
 		// print_r($response);
 	}
