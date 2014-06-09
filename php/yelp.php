@@ -22,8 +22,11 @@ if (!$_POST['name']) {
 	foreach($result->businesses as $business){
 		echo "<div class='card'>";
 		echo "<a class='card_content'  href='" . $business->url . "'>" . $business->name . "<br>";
-		echo "<img border='0' src='" . $business->rating_img_url_large . "' width='83' height='15'>";
+		echo "<img border='0' style='padding-top:10; padding-right:10' src='" . $business->rating_img_url_large . "' width='83' height='15'>";
 		echo "</a>";
+		echo "<form action='update.php' method='post' style='padding-left:10'>
+				<button class='button add' name='name' type='submit' value='" . $business->name . "'>Add</button>
+			  </form>";
 		echo "</div>";
 	}
 }
