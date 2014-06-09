@@ -1,7 +1,7 @@
 <?php
 
 // Enter the path that the oauth library is in relation to the php file
-require_once ('../lib/yelp.php');
+require_once ('../lib/yelpSearch.php');
 
 if (isset($_GET["term"])) {
 	$term = $_GET["term"];

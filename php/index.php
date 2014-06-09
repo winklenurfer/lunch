@@ -1,5 +1,6 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- HTML5 -->
 <meta charset="utf-8">
 <link href='http://fonts.googleapis.com/css?family=Roboto:300,900' rel='stylesheet' type='text/css'>
@@ -10,7 +11,7 @@
 <div class='wrapper'>
 	<div>What about one of these places?</div>
 	
-	<div class='random'>
+	<div class='card'>
 		<?php
 		require ('lib/dbRestaurants.php');
 		$dbRestaurants = new dbRestaurants();

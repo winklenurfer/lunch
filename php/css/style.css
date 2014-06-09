@@ -38,7 +38,7 @@ div.list_all {
 	line-height: 150%;
 }
 
-div.random {
+div.card {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	width: 90%;
@@ -52,6 +52,16 @@ div.random {
 	line-height: 150%;
 	border: 1px solid #d4d4d4;
 	border-radius: 3px;
+}
+
+.card_content {
+	margin:0px;
+	padding:10px 4px;
+	border:2px;
+	color: #333;
+	font-size:22px;
+	line-height:22px;
+    text-shadow: 1px 1px 0 #fff;
 }
 
 div.random_item_1 {
@@ -94,7 +104,7 @@ button.danger {
 	color:#FFF;
 }
 
-a:link {color:#DDD;}    /* unvisited link */
-a:visited {color:#DDD;}  /* visited link */
-a:hover {color:#FFF;}  /* mouse over link */
-a:active {color:#AAA;}  /* selected link */
+a.url:link {color:#DDD;}    /* unvisited link */
+a.url:visited {color:#DDD;}  /* visited link */
+a.url:hover {color:#FFF;}  /* mouse over link */
+a.url:active {color:#AAA;}  /* selected link */
